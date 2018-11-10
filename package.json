@@ -8,8 +8,8 @@
     "npm": "6.4.1"
   },
   "scripts": {
-    "start": "node index.js",
-    "server-watch": "nodemon index.js"
+    "start-server": "node index.js",
+    "dev-server": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
