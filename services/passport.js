@@ -25,7 +25,8 @@ passport.use(
   new GoogleStrategy({
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
-    callbackURL: '/auth/google/callback'
+    callbackURL: '/auth/google/callback',
+    proxy: true // <- tells google to trust the proxy, stops the redirect_uri_mismatch error in runtime
   }, (accessToken, refreshToken, profile, done) => {
     // prevents mongo from saving more than 1 instance of a user
     User.findOne({googleId: profile.id})
