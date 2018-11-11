@@ -6,10 +6,18 @@ const keys = require('../config/keys');
 
 const User = mongoose.model('users');
 
-// identify user inside of cookie from mongoDB
+// identify user inside of cookie to mongoDB
 // user.id is the _id var from mongoDB
 passport.serializeUser((user, done) => {
   done(null, user.id);
+});
+
+// strips token id from cookie sent from mongoDB
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .then((user) => {
+      done(null, user);
+    });
 });
 
 // tells passport to handle the google passport strategy
