@@ -2,13 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const keys = require('./config/keys');
+require('./models/User'); // <- have to require the schema before its used in passport.js
 require('./services/passport');
-require('./models/User');
 
 // tells mongoose to connect to the mongoDB
-mongoose.connect(keys.mongoURI)
-  .then(() => {})
-  .catch((err) => console.log('[index.js] Error connecting to MongoDB'));
+// useNewUrlParser is used so mongo doesnt throw a deprecation warning
+mongoose.connect(keys.mongoURI, {useNewUrlParser: true})
+  .catch((err) => console.log('[index.js] Deprication warning connecting to MongoDB (this is ok, its on mongoDB)'));
 
 // create app and tell it to use the routes on authRoutes.js
 const app = express();
