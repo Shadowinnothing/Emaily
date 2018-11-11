@@ -10,4 +10,9 @@ module.exports = (app) => {
   }));
 
   app.get('/auth/google/callback', passport.authenticate('google'));
+
+  // returns user that is currently logged in
+  app.get('/api/current_user', (req, res) => {
+    res.send(req.user);
+  });
 };

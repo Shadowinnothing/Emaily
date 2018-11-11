@@ -12,7 +12,7 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-// strips token id from cookie sent from mongoDB
+// turns token id into user from cookie sent from mongoDB
 passport.deserializeUser((id, done) => {
   User.findById(id)
     .then((user) => {
