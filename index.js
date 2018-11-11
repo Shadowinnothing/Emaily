@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const keys = require('./config/keys');
 require('./services/passport');
+require('./models/User');
 
 // tells mongoose to connect to the mongoDB
 mongoose.connect(keys.mongoURI)
