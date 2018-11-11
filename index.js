@@ -1,7 +1,15 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
+const keys = require('./config/keys');
 require('./services/passport');
 
+// tells mongoose to connect to the mongoDB
+mongoose.connect(keys.mongoURI)
+  .then(() => {})
+  .catch((err) => console.log('[index.js] Error connecting to MongoDB'));
+
+// create app and tell it to use the routes on authRoutes.js
 const app = express();
 require('./routes/authRoutes')(app);
 
