@@ -18,11 +18,15 @@ passport.use(
       .then((existingUser) => {
         if(existingUser){
           // user already exists
+          done(null, existingUser);
         } else {
           // save new user to DB
-          new User({googleId: profile.id}).save(); // <- save modal instance to DB
+          new User({googleId: profile.id})
+            .save()
+            .then((user) => done(null, user))
+            .catch((err) => console.log('[passport.js] error with mongoDB'));
         }
-      });
-    //done(); // <- not sure if needed yet...
+      })
+      .catch((err) => console.log('[passport.js] error with mongoDB'));
   })
 );
