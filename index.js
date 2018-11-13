@@ -23,5 +23,5 @@ require('./routes/authRoutes')(app); // <- tell app to use these routes
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`App is listening on port: ${PORT}`);
+  console.log(`Express Server App is listening on port: \'${PORT}\'`);
 });

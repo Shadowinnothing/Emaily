@@ -27,21 +27,15 @@ passport.use(
     clientSecret: keys.googleClientSecret,
     callbackURL: '/auth/google/callback',
     proxy: true // <- tells google to trust the proxy, stops the redirect_uri_mismatch error in runtime
-  }, (accessToken, refreshToken, profile, done) => {
-    // prevents mongo from saving more than 1 instance of a user
-    User.findOne({googleId: profile.id})
-      .then((existingUser) => {
-        if(existingUser){
-          // user already exists
-          done(null, existingUser);
-        } else {
-          // save new user to DB
-          new User({googleId: profile.id})
-            .save()
-            .then((user) => done(null, user))
-            .catch((err) => console.log('[passport.js] error with mongoDB'));
-        }
-      })
-      .catch((err) => console.log('[passport.js] error with mongoDB'));
+  }, async (accessToken, refreshToken, profile, done) => {
+      // prevents mongo from saving more than 1 instance of a user
+      const existingUser = await User.findOne({googleId: profile.id})
+      if(existingUser){
+        // user already exists, dont save new user to mongoDB
+        return done(null, existingUser);
+      }
+      // user doesnt exist, save new user to DB
+      const user = await new User({googleId: profile.id}).save();
+      done(null, user);
   })
 );
