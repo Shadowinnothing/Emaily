@@ -4,19 +4,19 @@ import {connect} from 'react-redux';
 class Header extends Component {
 
   renderContent(){
-    console.log('auth', this.props.auth)
     switch(this.props.auth){
       case null:
-        return 'Still deciding'
+        return; // <- dont show anything on right side of header if page is still loading
       case false:
-        return 'User Logged Out'
+        return ( // <- link to login page if not logged in
+          <li><a href="/auth/google">Login With Google</a></li>
+        );
       default:
-        return 'User Logged in'
+        return <li><a href="/api/logout">Logout</a></li>; // <- just some weight, needs to be changed when billing is introduced
     }
   };
 
   render(){
-    console.log('props', this.props)
     return (
       <nav>
         <div className="nav-wrapper">
