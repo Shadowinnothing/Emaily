@@ -26,9 +26,4 @@ module.exports = (app) => {
   app.get('/api/current_user', (req, res) => {
     res.send(req.user);
   });
-
-  // recieves token for stripe and
-  app.post('/api/stripe', (req, res) => {
-    console.log('req created')
-  });
 };
