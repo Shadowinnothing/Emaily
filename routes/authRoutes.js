@@ -1,28 +1,29 @@
 const passport = require('passport');
 
 module.exports = (app) => {
-  app.get('/', (req, res) => {
-    res.send({hi: 'this is just a test'});
-  });
-
+  // starts oauth flow to login user
   app.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'email']
+    scope: ['profile', 'email'],
+    prompt: 'select_account' // <- prompted to select account
   }));
 
-  app.get('/auth/google/callback', passport.authenticate('google'));
+  // after user logs into google, finish oauth and send the user to /surveys
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google'),
+    (req, res) => {
+      res.redirect('/surveys')
+    }
+  );
 
   // logout user
   app.get('/api/logout', (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.redirect('/'); // <- redirect back to home page
   });
 
   // returns user that is currently logged in
   app.get('/api/current_user', (req, res) => {
-    if(req.user){
-      res.send(req.user);
-    } else {
-      res.send('you are not signed in');
-    }
+    res.send(req.user);
   });
 };
