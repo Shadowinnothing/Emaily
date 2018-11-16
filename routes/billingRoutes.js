@@ -6,13 +6,18 @@ const stripe = require('stripe')(
 module.exports = (app) => {
   // recieves token for stripe and create a charge
   app.post('/api/stripe', async (req, res) => {
-     const charge = await stripe.charges.create({
-       amount: 500, // <- charge in pennies
-       currency: 'usd',
-       description: '$5 for 5 credits',
-       source: req.body.id
-     });
+    if(!req.user){
+      return res.status(401).send({error: 'You must be logged in!'});
+    };
+      const charge = await stripe.charges.create({
+        amount: 500, // <- charge in pennies
+        currency: 'usd',
+        description: '$5 for 5 credits',
+        source: req.body.id
+      });
 
-     console.log(charge);
+      req.user.credits += 5;
+      const user = await req.user.save();
+      res.send(user);
   });
 };
