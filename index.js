@@ -14,6 +14,7 @@ mongoose.connect(keys.mongoURI, {useNewUrlParser: true})
   .catch((err) => console.log('[index.js] Deprication warning connecting to MongoDB (this is ok, its on mongoDB)'));
 
 const app = express();
+
 app.use(bodyParser.json());
 app.use(cookieSession({ // <- express doesnt use cookies out the box, this tells it to use cookies
   maxAge: 30 * 24 * 60 * 60 * 1000, // <- let cookie last for 30 days in ms
@@ -21,6 +22,7 @@ app.use(cookieSession({ // <- express doesnt use cookies out the box, this tells
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
 require('./routes/authRoutes')(app); // <- tell app to use these routes
 require('./routes/billingRoutes')(app);
 
