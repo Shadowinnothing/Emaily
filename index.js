@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 
 require('./models/User'); // <- have to require the schema before its used in passport.js
+require('./models/Survey');
 require('./services/passport');
 
 // tells mongoose to connect to the mongoDB
