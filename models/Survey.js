@@ -15,7 +15,14 @@ const surveySchema = new Schema({
   no: {
     type: Number,
     default: 0
-  }
+  },
+  // tells the schema it belongs to one user
+  _user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  dateSent: Date,
+  lastResponded: Date
 });
 
 mongoose.model('surveys', surveySchema);
