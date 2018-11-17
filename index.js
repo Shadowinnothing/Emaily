@@ -26,6 +26,7 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app); // <- tell app to use these routes
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 // makes sure express routes works right in production
 if(process.env.NODE_ENV === 'production'){
