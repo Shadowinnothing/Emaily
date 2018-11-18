@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
+const Mailer = require('../services/Mailer');
+const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
 // dont require the surveySchema.js file to avoid problems
 // with importing surveySchema all over the place
@@ -19,5 +21,8 @@ module.exports = (app) => {
       _user: req.user.id,
       dateSent: Date.now()
     });
+
+    // Send email here
+    const mailer = new Mailer(survey, surveyTemplate(survey));
   });
 };
