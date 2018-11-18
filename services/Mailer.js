@@ -9,6 +9,7 @@ class Mailer extends helper.Mail {
     super();
 
     // sendgrid setup
+    this.sgApi = sendgrid(keys.sendGridKey); // <- connect to sendgrid API
     this.from_email = new helper.Email('no-reply@emaily.com');
     this.subject = subject;
     this.body = new helper.Content('text/html', content);
