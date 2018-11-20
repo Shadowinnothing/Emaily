@@ -18,19 +18,17 @@ class App extends Component {
 
   render(){
     return (
-      <div className="container"> {/* <- container Adds spacing on the left and right sides of the app */}
-        <BrowserRouter>
-          <div>
-            <Header />
-            <Switch>
-              <Route path="/" component={Landing} exact />
-              <Route path="/surveys" component={Dashboard} exact />
-              <Route path="/surveys/new" component={SurveyNew} />
-              <Route component={NotFoundPage} />
-            </Switch>
-          </div>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <div className="container"> {/* <- container Adds spacing on the left and right sides of the app */}
+          <Header />
+          <Switch>
+            <Route path="/" component={Landing} exact />
+            <Route path="/surveys" component={Dashboard} exact />
+            <Route path="/surveys/new" component={SurveyNew} />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   };
 };
