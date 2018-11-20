@@ -1,15 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-// renders survey form
-class SurveyField extends Component {
-
-  render() {
-    return (
+// contains logic to render a single
+// label and text input
+export default ({input}) => {
+  return (
       <div>
-        <p>SurveyField!</p>
+        <input {...input} />
       </div>
-    );
-  };
+  );
 };
-
-export default SurveyField;
