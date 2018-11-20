@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {reduxForm} from 'redux-form';
+import {reduxForm, Field} from 'redux-form';
 
 // shows a form for a user to add input
 class SurveyForm extends Component {
@@ -7,7 +7,14 @@ class SurveyForm extends Component {
   render() {
     return (
       <div>
-        SurveyForm!!!
+        <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+          <Field
+            type="text"
+            name="surveyTitle"
+            component="input"
+          />
+          <button type="submit">Submit</button>
+        </form>
       </div>
     );
   };
