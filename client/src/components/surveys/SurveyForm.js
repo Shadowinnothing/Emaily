@@ -41,7 +41,7 @@ function validate(values) {
   const errors = {};
 
   // return array of invalid arrays
-  errors.emails = validateEmails(values.emails || '');
+  errors.recipients = validateEmails(values.recipients || '');
 
   _.each(formFields, ({name}) => {
     if(!values[name]){
