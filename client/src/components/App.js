@@ -8,7 +8,7 @@ import Landing from './Landing';
 import Dashboard from './Dashboard';
 import SurveyNew from './surveys/SurveyNew';
 import NotFoundPage from './NotFoundPage';
-import ThankYouPage from './surveys/ThankYouPage';
+//import ThankYouPage from './surveys/ThankYouPage';
 
 class App extends Component {
   componentDidMount(){
