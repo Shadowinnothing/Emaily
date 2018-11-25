@@ -8,7 +8,7 @@ import Landing from './Landing';
 import Dashboard from './Dashboard';
 import SurveyNew from './surveys/SurveyNew';
 import NotFoundPage from './NotFoundPage';
-//import ThankYouPage from './surveys/ThankYouPage';
+import ThankYouPage from './surveys/ThankYouPage';
 
 class App extends Component {
   componentDidMount(){
@@ -26,7 +26,7 @@ class App extends Component {
             <Route path="/" component={Landing} exact />
             <Route path="/surveys" component={Dashboard} exact />
             <Route path="/surveys/new" component={SurveyNew} />
-            {/*<Route path="/api/surveys/thanks" component={ThankYouPage} />*/}
+            <Route path="/api/surveys/:surveyId/:choice" component={ThankYouPage} />
             <Route component={NotFoundPage} />
           </Switch>
         </div>
